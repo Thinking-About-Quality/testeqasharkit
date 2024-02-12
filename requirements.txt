@@ -1,0 +1,15 @@
+autopep8==1.6.0
+docker==4.1.0
+docker-compose==1.25.0
+gitignore==0.0.8
+grpcio==1.16.1
+h11==0.13.0
+httplib2==0.14.0
+requests==2.22.0
+requests-file==1.4.3
+requests-unixsocket==0.2.0
+robotframework==5.0.1
+robotframework-pythonlibcore==3.0.0
+robotframework-requests==0.9.4
+robotframework-seleniumlibrary==6.0.0
+robotframework-faker==5.0.0

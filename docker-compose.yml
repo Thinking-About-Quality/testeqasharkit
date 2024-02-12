@@ -1,0 +1,56 @@
+version: '3.6'
+
+services:
+  sharkit-postgres:
+    image: postgres
+    container_name: sharkit-postgres
+    environment:
+      - NODE_ENV=development
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qatester
+      - POSTGRES_DB=sharkit
+    ports:
+      - '5432:5432'
+    networks:
+      - sharkit-network
+
+  sharkit-pgadmin:
+    image: dpage/pgadmin4
+    container_name: sharkit-pgadmin
+    ports:
+      - '15432:80'
+    environment: 
+      - NODE_ENV=development
+      - PGADMIN_DEFAULT_EMAIL=root@tester.io
+      - PGADMIN_DEFAULT_PASSWORD=qatester
+    networks:
+      - sharkit-network
+
+  sharkit-api:
+    image: qatester/zp-api
+    container_name: sharkit-api
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=sharkit-postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qatester
+      - POSTGRES_DB=sharkit
+    ports:
+      - '3333:3333'
+    networks:
+      - sharkit-network
+
+  sharkit-web:
+    image: qaninja/zp-web
+    container_name: sharkit-web
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+    networks:
+      - sharkit-network
+
+networks:
+  sharkit-network:
+    name: sharkit-network
+    driver: bridge
